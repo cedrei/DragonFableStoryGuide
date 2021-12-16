@@ -1,0 +1,638 @@
+<!--
+  Licenced under  GPL-3.0-or-later
+-->
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>DDG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico?">
+  <link rel="apple-touch-icon-precomposed" href="img/beenhere.png">
+  <link rel="mask-icon" href="img/svg.svg" color="#000000">
+  <meta name="description" content="The Definite DragonFable Guide is a companion for DragonFable, the web-based fantasy RPG.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link id="bootstrap" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link href="css/main.css" rel="stylesheet">
+  <style id="dynamicUnderlineStyles"></style>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="nav-collapse">
+        <ul class="nav navbar-nav">
+        <!-- <li><a href="#tabGear" class="underline-this" data-toggle="tab">BiS</a></li> -->
+          <li class="active"><a href="#tabStory" class="underline-this" data-toggle="tab">Story</a></li>
+          <li><a href="#tabFAQ" class="underline-this" data-toggle="tab">FAQ</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="btn-group" id="hide-completed" role="group" data-toggle="buttons">
+            <label class="btn btn-default">
+            <input id="toggleHideCompleted" type="checkbox">
+            <span class="glyphicon glyphicon-eye-close"></span>
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Hide Completed
+            </label>
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-cog" id="options"></span>
+            <div id="options-triangle"></div>
+          </li>
+        </ul>
+        <!-- /.nav.navbar-nav -->
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+  <div id="options-dropdown">
+    <h4 class="options-item" id="current-profile">
+      Default Profile
+    </h4>
+    <div class="options-item" id="change-profile">
+      <span class="glyphicon glyphicon-user"></span>
+      <span class="options-text">Profile</span>
+      <span class="glyphicon glyphicon-menu-down profile-glyph" id="profile-inactive"></span>
+      <span class="glyphicon glyphicon-menu-up profile-glyph" id="profile-active"></span>
+    </div>
+    <div class="hidden-options options-item" id="profile-selector">
+      <div class="form-group" id="profiles-dropdown"><select class="form-control" id="profiles"></select></div>
+      <button class="btn btn-default options-button" type="button" id="profileAdd">Add</button>
+      <button class="btn btn-default options-button" type="button" id="profileEdit">Edit</button>
+      <button class="btn btn-default options-button" type="button" id="profileImport">Import</button>
+      <button class="btn btn-default options-button" type="button" id="profileExport">Export</button>
+    </div>
+    <div class="options-item" id="change-theme">
+      <span class="glyphicon glyphicon-th-list"></span>
+      <span class="options-text">Theme</span>
+      <span class="glyphicon glyphicon-menu-down theme-glyph" id="themes-inactive"></span>
+      <span class="glyphicon glyphicon-menu-up theme-glyph" id="themes-active"></span>
+    </div>
+    <div class="hidden-options options-item" id="themes-selector">
+      
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="tab-content">
+      
+      <!-- PLAYTHROUGH START -->
+      
+
+      <div class="tab-pane active" id="tabStory">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1><strong>Definitive DragonFable Guide</strong></h1>
+            <p class="lead">Give us feedback on the <a href="https://discord.gg/SC3zM3v">largest DragonFable Discord server</a>!</p><hr><h4>The Story Checklist is a companion for DragonFable. Using your in-game Book of Lore and travel map is crucial when following this guide.</h4>
+          </div>
+        </div>
+      	<h2 class="col-md-6"><strong>Story Checklist</strong>&nbsp;<span id="playthrough_overall_total"></span></h2>
+        <!-- Toolbar -->
+        <div class="col-md-6" role="group" data-toggle="buttons">
+          <div class="btn-group filters">
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_sidequest" data-item-toggle="f_sidequest" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Side Quests
+            </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_unimportant" data-item-toggle="f_unimportant" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Unimportant Quests
+            </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_seasonal" data-item-toggle="f_seasonal" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Seasonal Events
+            </label>
+        </div>
+        </div>
+
+        <ul class="table_of_contents col-md-8">
+          <li><a href="#book1">Book 1</a>&nbsp;<span id="playthrough_nav_totals_1"></span></li>
+          <li><a href="#book2">Book 2</a>&nbsp;<span id="playthrough_nav_totals_2"></span></li>
+          <li><a href="#book3">Book 3</a>&nbsp;<span id="playthrough_nav_totals_3"></span></li>
+        </ul>
+
+        <div id="playthrough_list" class="col-md-12 no-text-select">
+
+          <h3 id="book1"><a href="#book1_col" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm"></a>Book 1&nbsp;<span id="playthrough_totals_1"></span></h3>
+          <ul id="book1_col" class="collapse in">
+          	<li data-id="playthrough_1_1">Introduction: <strong>A Hero is Bored</strong></li>
+          	
+          	<li data-id="playthrough_1_3" class="f_sidequest f_unimportant">Complete Sir Valence's <a href="http://forums2.battleon.com/f/tm.asp?m=18958551">quests</a> at Oaklore Keep</li>
+          	<li data-id="playthrough_1_4" class="f_sidequest f_unimportant">Complete Sir Valence's <strong>Sir Vey's Camp!</strong> saga at Oaklore Keep</li>
+          	<li data-id="playthrough_1_5" class="f_sidequest f_unimportant">Complete Sir Junn's <strong>Honey Quest</strong> at the infirmary in Oaklore Keep</li>
+          	<li data-id="playthrough_1_6" class="f_sidequest f_unimportant">Complete Sir Prize's <a href="http://forums2.battleon.com/f/tm.asp?m=18958769">quests</a> at Oaklore Keep</li>
+          	<li data-id="playthrough_1_7" class="f_sidequest f_unimportant">Complete Sir Pernatural's <strong>Sir Koffagus</strong> quest at Oaklore Keep</li>
+          	<li data-id="playthrough_1_8" class="f_sidequest f_unimportant">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=18968009">quests</a> from Sir Casm at Oaklore Keep: <strong>Sir Jing's Weapons</strong> and <strong>Explore Ruins</strong></li>
+            <li data-id="playthrough_1_2">Complete Rolith's <strong>The Priestess' Message</strong> quest in Oaklore Keep</li>
+          	<li data-id="playthrough_1_126">Make your way to Falconreach through the bridge</li>
+          	<li data-id="playthrough_1_127">Complete the <strong>Undead Assault</strong> war at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+          	<li data-id="playthrough_1_9" class="f_sidequest">Complete Gram's <strong>Missing Granddaughter?</strong> quest at the pet shop in Falconreach</li>
+          	<li data-id="playthrough_1_10" class="f_sidequest f_unimportant">Complete Ash's Challenge at Falconreach</li>
+            <li data-id="playthrough_1_24" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 1</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_1_25" class="f_sidequest f_seasonal">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21932178">PumpkinLord Armor</a> by gathering candy on Mogloween</li>
+            <li data-id="playthrough_1_26" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 1</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_1_27" class="f_ sidequest f_seasonal">Complete <strong>Chapter 1</strong> of the Frostval storybook</li>
+          	<li data-id="playthrough_1_11" info-text="This saga has a level 10 requirement. If you haven't reached level 10 yet, complete side quests at Oaklore Keep or from Ash (Stay away from Wanderland and Colorless for now though).">Complete Ash's <strong>Dracolich</strong> saga at Falconreach</li>
+          	<li data-id="playthrough_1_12">Complete the <strong>Ice Dragon War</strong> at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+          	<li data-id="playthrough_1_13">Talk to Twilly in Falconreach</li>
+          	<li data-id="playthrough_1_14">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=4901313">quests</a> from Robina at Surewould Forest: <strong>Golden Opportunity</strong> through <strong>Give till' it hurts...</strong></li>
+          	<li data-id="playthrough_1_15">Talk to Robina, choose <strong>The Black Dragon Box</strong></li>
+          	<li data-id="playthrough_1_16">Complete the <strong>Wrath of Xan</strong> war at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+          	<li data-id="playthrough_1_17">Talk to Twilly in Falconreach</li>
+          	<li data-id="playthrough_1_18">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=8558119">quests</a> from Valencia, a short walk east of Falconreach: <strong>Trey Surehunter</strong> through <strong>Egg-xactly 5!</strong></li>
+          	<li data-id="playthrough_1_19">Talk to Twilly in Falconreach</li>
+          	<li data-id="playthrough_1_20">Complete Warlic's <strong>Dragon Egg</strong> saga at Warlic's Tent</li>
+            <li data-id="playthrough_1_22">Complete a quest from Twilly's <strong>Dragon Egg Saga</strong>: <strong>The Secret Cave</strong></li>
+            <li data-id="playthrough_1_21">Complete the <strong>Arachnattack</strong> war at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+            <li data-id="playthrough_1_23">Complete a quest from Twilly's <strong>Legend of the DragonLord</strong> saga: <strong>The Hatching!</strong></li>
+            <li data-id="playthrough_1_28">Complete quests at Willowshire: <strong>Dravir Siege!</strong> and <strong>Mission</strong></li>
+            <li data-id="playthrough_1_29">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=7633235">quests</a> from Thursday at Amityvale: <strong>Haunted House</strong> through <strong>Yaga Stone Circle</strong></li>
+            <li data-id="playthrough_1_30">Complete the <strong>Beach Vacation Invasion</strong> war at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+            <li data-id="playthrough_1_31">Complete the quest <strong>The Vampire Tower</strong> at easternmost Amityvale</li>
+            <li data-id="playthrough_1_32">Complete <strong>War at See</strong> at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+            <li data-id="playthrough_1_33" class="f_sidequest">Complete Warlic's <strong>The Letter</strong> quest at Warlic's Tent</li>
+            <li data-id="playthrough_1_34">Travel to Warlic's Tent and gather 10 Elemental Essences through Warlic's random quests</li>
+            <li data-id="playthrough_1_35">Talk to Doug Digg in Lymcrest</li>
+            <li data-id="playthrough_1_36" class="f_sidequest">Complete Sir Ano's <a href="http://forums2.battleon.com/f/tm.asp?m=18959026">quests</a> at Oaklore Keep</li>
+            <li data-id="playthrough_1_37">Talk to Warlic, choose "Other Quests" and complete the <strong>Save Lymcrest</strong> saga at Warlic's Tent</li>
+            <li data-id="playthrough_1_38" info-text="This quest should be played with a high suspension of disbelief." class="f_sidequest">Complete the priestess' <strong>Titans of Battleon!</strong> quest at Sunbreeze Grove</li>
+            <li data-id="playthrough_1_39" class="f_sidequest" info-text="Level 21 is required to fully train DragonLord. If you're not yet at this level, progress through the story and come back later.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=19905988">DragonLord armor</a> by going through the priestess' <a href="http://forums2.battleon.com/f/tm.asp?m=9769271">DragonLord training quest</a> in Sunbreeze Grove</li>
+            <li data-id="playthrough_1_40" class="f_sidequest" info-text="Level 23 is required to fully train DragonRider. If you're not yet at this level, progress through the story and come back later.">Fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=20046277">DragonRider Armor</a> by going through the priestess' <a href="http://forums2.battleon.com/f/tm.asp?m=10023955">DragonRider training quest</a> in Sunbreeze Grove</li>
+            <li data-id="playthrough_1_41" info-text="It is highly recommended to train the DragonRider armor before this saga." class="f_sidequest">Talk to the priestess, choose "Baby Dragon Quests &amp; Training" and complete the <strong>Dragon Quests</strong> saga at Sunbreeze Grove</li>
+            <li data-id="playthrough_1_42" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 2</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_1_43" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 2</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_1_44">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=10803815">quests</a> from Rhubarb's <strong>Wind Orb</strong> saga at Osprey Cove: <strong>Water Breathing Potions</strong> through <strong>Box of Ninjas</strong></li>
+            <li data-id="playthrough_1_45" part-of="playthrough_1_49">Complete the <strong>Pirate vs Ninja</strong> war at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+            <li data-id="playthrough_1_46">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=10803815">quests</a> from Rhubarb's <strong>Wind Orb</strong> saga at Osprey Cove: <strong>Captain's Orders</strong> through <strong>Sepulchure</strong></li>
+            <li data-id="playthrough_1_47" class="f_sidequest" info-text="Black Pearls can be efficiently farmed for through the Cleaning House quest.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21953718">Pirate Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=10961728">Black Pearl</a>s on Rhubarb's random quests at Osprey Cove</li>
+            <li data-id="playthrough_1_48" info-text="The Wind Orb saga is told as if you picked a side. As such, only one side is required to complete the storyline; it is highly recommended to do the pirate side of the story due to minor plot points being explored on a major scale later on. The ninja side can be also be done, but bearing in mind that it's the same story told on a different perspective.">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=10803815">quests</a> from Thyton's <strong>Wind Orb</strong> saga at Shadow of the Wind Village: <strong>Run of the Kessel!</strong> through <strong>Return the Scrolls</strong></li>
+            <li data-id="playthrough_1_49" part-of="playthrough_1_45">Complete the <strong>Pirate vs Ninja</strong> war at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+            <li data-id="playthrough_1_50">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=10803815">quests</a> from Thyton's <strong>Wind Orb</strong> saga at Shadow of the Wind Village: <strong>Walk Through Fire</strong> through <strong>Sepulchure</strong></li>
+            <li data-id="playthrough_1_51" class="f_sidequest f_unimportant">Complete Thyton's <strong>Illusion</strong> quest in Shadow of the Wind Village</li>
+            <li data-id="playthrough_1_52" class="f_sidequest" info-text="Wind Scrolls can be efficiently farmed for through the Chart Captors quest.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=20707700">Ninja Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=11453699">Wind Scroll</a>s on Thyton's random quests at Shadow of the Wind Village</li>
+            <li data-id="playthrough_1_53">Complete Zhoom's <strong>Light Orb</strong> saga at The Sandsea</li>
+            <li data-id="playthrough_1_54" class="f_sidequest" info-text="Ancient Treasures can be efficiently farmed for through the Tomb Traps quest.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=19925149">Ranger Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=12600795">Ancient Treasure</a>s on Zhoom's random quests at The Sandsea</li>
+            <li data-id="playthrough_1_55" class="f_sidequest f_unimportant">Complete Artix's <strong>Haunted Castle</strong> quest at The Necropolis</li>
+            <li data-id="playthrough_1_56">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=13447466">quests</a> from Artix's <strong>Darkness Orb</strong> saga at The Necropolis: <strong>Save Moonridge!</strong> through <strong>Artix Vs. The Undead</strong></li>
+            <li data-id="playthrough_1_57">Complete the <strong>Assault on the Necropolis</strong> war at the Time Travel Fairies Time Tours statue in southern Falconreach</li>
+            <li data-id="playthrough_1_58">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=13447466">quests</a> from Artix's <strong>Darkness Orb</strong> saga at The Necropolis: <strong>Noxus Fumes</strong> and <strong>Extra Credit</strong></li>
+            <li data-id="playthrough_1_59" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 1</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_1_60" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 1</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_1_61">Complete Galanoth's <strong>Ice Orb</strong> saga at Dragesvard</li>
+            <li data-id="playthrough_1_62" class="f_sidequest">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21921654">DragonSlayer armor</a> by going through Galanoth's <a href="http://forums2.battleon.com/f/tm.asp?m=15166383">DragonSlayer training quest</a> in Dragesvard</li>
+            <li data-id="playthrough_1_63" class="f_sidequest f_unimportant">Talk to Nati, choose "Quests!" and complete Gris' <a href="http://forums2.battleon.com/f/tm.asp?m=19968260">quests</a> at the auction house in northern Falconreach</li>
+            <li data-id="playthrough_1_64" class="f_sidequest f_unimportant">Investigate the magically sealed tomb by going north of Hunter's Paradise</li>
+            <li data-id="playthrough_1_65">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=8515738">quests</a> from Nythera at Warlic's Tent: <strong>Stocking the Shelves</strong> through <strong>The Storm War</strong></li>
+            <li data-id="playthrough_1_66">Complete Yix's <strong>Energy Orb</strong> saga at Popsprocket</li>
+            <li data-id="playthrough_1_67" class="f_sidequest" info-text="Charged Cogs are also awarded on other quests from Yix, but Richard's Gear is the best quest to farm for them.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21817341">Technomancer Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=15580569">Charged Cog</a>s on Yix's <strong>Richard's Gear</strong> quest at Popsprocket</li>
+            <li data-id="playthrough_1_68" class="f_sidequest">Complete Zapp's <a href="http://forums2.battleon.com/f/tm.asp?m=15580422">quests</a> at Popsprocket</li>
+            <li data-id="playthrough_1_69" class="f_sidequest f_unimportant">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=16608052">quests</a> from Alina in Falconreach</li>
+            <li data-id="playthrough_1_70" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 3</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_1_71" class="f_sidequest f_seasonal">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=19847974">Evolved PumpkinLord Armor</a> by gathering candy on Mogloween</li>
+            <li data-id="playthrough_1_72" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 3</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_1_73" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 3</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_1_74" class="f_sidequest f_seasonal" info-text="Slay Bells can be efficiently farmed for through the NoX-Mas quest. Enter the first cave before the first enemy, then exit it by entering it from the way you came. Re-enter it again, then exit. Repeat until you find the boss.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21920114">Frost Moglin Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=15237176">Slay Bell</a>s on Chapter 3 of the Frostval storybook</li>
+            <li data-id="playthrough_1_75" class="f_sidequest f_unimportant">Talk to the priestess, choose "Other Quests" and complete the <strong>Recipe for Disaster</strong> saga at Sunbreeze Grove</li>
+            <li data-id="playthrough_1_76" class="f_sidequest f_unimportant">Complete Ash's <strong>Colorless</strong> saga at Falconreach</li>
+            <li data-id="playthrough_1_77">Complete Valencia's <strong>Bacon Origin</strong> saga at easternmost Falconreach</li>
+            <li data-id="playthrough_1_78">Complete Ash's <strong>ArchKnight</strong> saga available through talking to him in Falconreach</li>
+            <li data-id="playthrough_1_79">Complete Yulgar's <strong>Fire Orb</strong> saga at the weapon shop in Falconreach</li>
+            <li data-id="playthrough_1_80" class="f_sidequest">Talk to the priestess, choose "Primal Dragon Skills" and complete the <strong>Primal Skills</strong> quest at Sunbreeze Grove</li>
+            <li data-id="playthrough_1_81" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 2</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_1_82" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 2</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_1_83" info-text="The following quests from Lim and Cysero should be played with a high suspension of disbelief.">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=16698154">quests</a> from Lim at the weapon shop in Falconreach: <strong>Lost Order</strong> and <strong>Circuits</strong></li>
+            <li data-id="playthrough_1_84">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=16908318">quest</a> from Lim's <strong>The Clashening</strong> saga at the weapon shop in Falconreach: <strong>Collision Course</strong></li>
+            <li data-id="playthrough_1_85">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=7628513">quests</a> from Cysero outside of Cysero's store in Falconreach: <strong>Choose Your Own AdventureQuest!</strong> and <strong>Back to the Past!</strong></li>
+            <li data-id="playthrough_1_86">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=16908318">quest</a> from Lim's <strong>The Clashening</strong> saga at the weapon shop in Falconreach: <strong>Blackhole Fun</strong></li>
+            <li data-id="playthrough_1_87"">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=7628513">quest</a> from Cysero outside of Cysero's store in Falconreach: <strong>Critical Failure</strong></li>
+            <li data-id="playthrough_1_88">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=16908318">quests</a> from Lim's <strong>The Clashening</strong> saga at the weapon shop in Falconreach: <strong>Gravitivity</strong> through <strong>Your Vote</strong></li>
+            <li data-id="playthrough_1_89" info-text="This quest should be played with a high suspension of disbelief." class="f_sidequest f_unimportant">Complete Zevox's <strong>On with the Show!</strong> saga at the theatre in southern Falconreach</li>
+            <li data-id="playthrough_1_90" class="f_seasonal">Complete <strong>Chapter 4</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_1_91">Complete Zorbak's <a href="http://forums2.battleon.com/f/tm.asp?m=5111390">quests</a> at Amityvale</li>
+            <li data-id="playthrough_1_92" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 4</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_1_93" class="f_ sidequest f_seasonal">Complete <strong>Chapter 4</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_1_94">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=16608105">quests</a> from Tomix at Ravenloss: <strong>Highway</strong> through <strong>Altar Hill</strong></li>
+            <li data-id="playthrough_1_95">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=13447466">quests</a> from Artix's <strong>Darkness Orb</strong> saga at The Necropolis: <strong>A Dark Letter</strong> and <strong>Memory-Demons</strong></li>
+            <li data-id="playthrough_1_96" class="f_sidequest" info-text="Undead Slayer Badges are also awarded on other quests from Artix, but Save Moonridge! is the best quest to farm for them.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21839368">Paladin Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=13447262">Undead Slayer Badge</a>s on Artix's <strong>Save Moonridge!</strong> quest at The Necropolis</li>
+            <li data-id="playthrough_1_97" class="f_sidequest">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21736232">Necromancer Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=13447262">Undead Slayer Badge</a>s on Artix's <strong>Save Moonridge!</strong> quest at The Necropolis</li>
+            <li data-id="playthrough_1_98" class="f_sidequest">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21919580">DeathKnight Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=13447262">Undead Slayer Badge</a>s on Artix's <strong>Save Moonridge!</strong> quest at The Necropolis</li>
+            <li data-id="playthrough_1_99">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=16608105">quests</a> from Tomix at Ravenloss: <strong>At the Gate</strong> and <strong>War!</strong></li>
+            <li data-id="playthrough_1_100">Talk to Tomix, choose "Become a SoulWeaver!" and complete Tomix's <strong>Meet Aegis</strong> quest at Ravenloss</li>
+            <li data-id="playthrough_1_101" class="f_sidequest" info-text="Shards of the Spirit-Loom can be efficiently farmed for through the Children of Ravenloss quest.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=19399175">SoulWeaver Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=17561495">Shard</a>s <a href="http://forums2.battleon.com/f/tm.asp?m=17561495">of the Spirit-Loom</a> on Tomix's random quests at Ravenloss</li>
+            <li data-id="playthrough_1_102" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 3</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_1_103" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 3</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_1_104" info-text="This saga should be played with a high suspension of disbelief." class="f_sidequest f_unimportant">Complete Ash's <strong>Wanderland</strong> saga at Falconreach</li>
+            <li data-id="playthrough_1_105" info-text="Serenity Okami is not the same character as Serenity at the inn on Falconreach." class="f_sidequest f_unimportant">Complete Serenity Okami's <a href="http://forums2.battleon.com/f/tm.asp?m=20542471">quest</a> at Osprey Cove</li>
+            <li data-id="playthrough_1_106" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 5</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_1_107" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 5</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_1_108" class="f_ sidequest f_seasonal">Complete <strong>Chapter 5</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_1_109">Talk to Channiru at Dragonsgrasp</li>
+            <li data-id="playthrough_1_110">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=17786726">quest</a> from Inspector Doyle's <strong>Vilmor</strong> saga at Dragonsgrasp: <strong>An Icy Wind</strong></li>
+            <li data-id="playthrough_1_111">Talk to Channiru at Dragonsgrasp</li>
+            <li data-id="playthrough_1_112">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=17735446">quests</a> from Inspector Doyle's <strong>Vilmor</strong> saga at Dragonsgrasp: <strong>The Blue Mile</strong> through <strong>Betrayal</strong></li>
+            <li data-id="playthrough_1_113">Talk to Channiru at Dragonsgrasp</li>
+            <li data-id="playthrough_1_114" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 4</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_1_115" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 4</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_1_116">Complete Nythera's <strong>Rise of the DragonMage</strong> saga</li>
+            <li data-id="playthrough_1_117">Catch a Johnnyfish at the <strong>Docks Fishing!</strong> minigame on northern Falconreach</li>
+            <li data-id="playthrough_1_118">Complete Aquella's <strong>Water Orb</strong> saga at The Locker</li>
+            <li data-id="playthrough_1_119" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 6</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_1_120" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 6</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_1_121" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 6</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_1_122" class="f_sidequest f_seasonal">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=19985571">TogSlayer Armor</a> by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=19910902">"Coal"</a> on <strong>Act 14</strong> of Chapter 6 of the Frostval storybook</li>
+            <li data-id="playthrough_1_123">Complete the <strong>Falconreach Spy Saga!</strong> at the pet shop in Falconreach (available through investigating the glowing hat behind the barrel)</li>
+            <li data-id="playthrough_1_124">Complete Guardian Fortuna's <strong>Earth Orb</strong> saga at Willowshire</li>
+            <li data-id="playthrough_1_125">Complete <strong>The Final 13th</strong> saga</li>
+          </ul>
+<hr>
+          <h3 id="book2"><a href="#book2_col" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm"></a>Book 2&nbsp;<span id="playthrough_totals_2"></span></h3>
+          <ul id="book2_col" class="collapse in">
+            <li data-id="playthrough_2_1">Complete the <strong>Rift War</strong></li>
+            <li data-id="playthrough_2_2" class="f_sidequest">Complete True Mortal's <strong>Rise of Nivalis</strong> saga</li>
+            <li data-id="playthrough_2_3" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 5</strong> of the Hero's Heart Day storybook</li>
+          	<li data-id="playthrough_2_4" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 5</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_2_5" class="f_sidequest f_unimportant">Complete San Robin's <a href="http://forums2.battleon.com/f/tm.asp?m=20343924">quests</a> at the inn in Falconreach</li>
+            <li data-id="playthrough_2_6">Complete the <strong>Rising Fire</strong> war</li>
+            <li data-id="playthrough_2_8">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=20129451">quests</a> from Yolande at The Anomaly: <strong>The Hunt Begins</strong> through <strong>Nightmares</strong></li>
+            <li data-id="playthrough_2_9" info-text="This saga takes place in the past.">Complete the <strong>Alexander</strong> saga (available through exploring the <a href="http://forums2.battleon.com/f/tm.asp?m=19876782">burnt house</a> at Swordhaven)</li>
+            <li data-id="playthrough_2_10">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=20129451">quests</a> from Yolande at The Anomaly: <strong>Puppets</strong> through <strong>The Merge</strong></li>
+            <li data-id="playthrough_2_7" class="f_sidequest">Unlock either <a href="http://forums2.battleon.com/f/tm.asp?m=21429654">Ascendant</a>, <a href="http://forums2.battleon.com/f/tm.asp?m=21320173">Cryptic</a> or <a href="http://forums2.battleon.com/f/tm.asp?m=21244966">Riftwalker</a> at The Spire at The Anomaly</li>
+          </ul>
+<hr>
+          <h3 id="book3"><a href="#book3_col" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm"></a>Book 3&nbsp;<span id="playthrough_totals_3"></span></h3>
+          <ul id="book3_col" class="collapse in">
+            <li data-id="playthrough_3_1">Introduction: <strong>A Hero is Thawed</strong></li>
+            <li data-id="playthrough_3_2">Make your way to Falconreach through the bridge</li>
+            <li data-id="playthrough_3_3">Complete Twilly's <strong>Player Hatching</strong> quest at Falconreach</li>
+            <li data-id="playthrough_3_4">Talk to Sielu in southern Falconreach</li>
+            <li data-id="playthrough_3_5" class="f_sidequest f_unimportant">Talk to the priestess, choose "Primal Dragon Skills" and complete the <strong>Fire Primal</strong>, <strong>Earth Primal</strong> and <strong>Water Primal</strong> quests at Sunbreeze Grove</li>
+            <li data-id="playthrough_3_6">Complete Airheart's <strong>Popsmashed!</strong> quest in southern Falconreach</li>
+            <li data-id="playthrough_3_7">Travel to <strong>The Crossroads</strong> in the Elemental Foothills region and talk to the NPC at Warlic's Tent</li>
+            <li data-id="playthrough_3_8">Complete Cinquefoil's <a href="http://forums2.battleon.com/f/tm.asp?m=21080576">quests</a> at Surewould Forest</li>
+            <li data-id="playthrough_3_9" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 7</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_3_10" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 7</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_3_11" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 7</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_3_12" class="f_sidequest">Complete the quest <strong>Monster Mill</strong> at southern Surewould Forest</li>
+            <li data-id="playthrough_3_13">Travel to Sulen'Eska in the Oaklore region and gather 20 Rose Emblems for Lojaali Vero through his quests</li>
+            <li data-id="playthrough_3_14">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21165429">quests</a> from Kara SuLema at Sulen'Eska: <strong>Song on the Wind</strong> through <strong>Dragon Rose War!</strong></li>
+            <li data-id="playthrough_3_15">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21430268">quests</a> from Sir Leon at The Shears: <strong>Oculus Tower</strong> through <strong>Destruction</strong></li>
+            <li data-id="playthrough_3_16" class="f_sidequest">Complete Ash's <strong>Corundum Corruption!</strong> quest from his letters in Falconreach</li>
+            <li data-id="playthrough_3_17" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 6</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_3_18" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 6</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_3_19">Complete Tomix's <strong>Void Ship</strong> saga at Pellow Village</li>
+            <li data-id="playthrough_3_20" info-text="This saga takes place in the future.">Complete <strong>The First Weaver</strong> saga at Tkaanie</li>
+            <li data-id="playthrough_3_21">Complete Aegis' <strong>Just Chillin'</strong> quest at Ravenloss</li>
+            <li data-id="playthrough_3_22" info-text="Despite this quest being a seasonal event, it can be played at any time of the year." class="f_sidequest">Complete Ash's <strong>Mother's Day!</strong> <a href="http://forums2.battleon.com/f/tm.asp?m=22258551">quest</a> in Falconreach</li>
+            <li data-id="playthrough_3_23">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21165429">quests</a> from Kara SuLema at Sulen'Eska: <strong>After the War</strong> through <strong>Broken Wings</strong></li>
+            <li data-id="playthrough_3_24">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21333941">quests</a> from Mritha at Sulen'Eska: <strong>Runed Fortress</strong> through <strong>Starcrossed</strong></li>
+            <li data-id="playthrough_3_25">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21495550">quests</a> from Symone's <strong>Gathering Shadows</strong> saga at Castle Valtrith: <strong>Castle Valtrith</strong> and <strong>The 13th 13th</strong></li>
+            <li data-id="playthrough_3_26" info-text="Completing this chapter means the quest Storm the Castle is automatically completed." class="f_seasonal" also-check="playthrough_3_29">Complete <strong>Chapter 8</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_3_27" class="f_sidequest f_seasonal" info-text="Bloody Monster Hearts are also awarded on other quests from Chapter 8 of the Mogloween storybook, but Castle Valtrith is the best quest to farm for them.">Unlock and fully train the <a href="http://forums2.battleon.com/f/tm.asp?m=21502390">Shadow Hunter Armor</a> on Chapter 8 of the Mogloween storybook by gathering <a href="http://forums2.battleon.com/f/tm.asp?m=21494274">Bloody Monster Heart</a>s in the <strong>Castle Valtrith</strong> quest</li>
+            <li data-id="playthrough_3_28" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 8</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_3_29">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=21515111">quest</a> from Symone's <strong>Gathering Shadows</strong> saga at Castle Valtrith: <strong>Storm the Castle</strong></li>
+            <li data-id="playthrough_3_30" info-text="Completing this chapter means the quest Frostval the 13th is automatically completed." also-check="playthrough_3_30" class="f_ sidequest f_seasonal">Complete <strong>Chapter 8</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_3_31">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=21545748">quest</a> from Symone's <strong>Gathering Shadows</strong> saga at Castle Valtrith: <strong>Frostval the 13th</strong></li>
+            <li data-id="playthrough_3_32" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 9</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_3_33" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 9</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_3_34">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21495550">quests</a> from Symone's <strong>Gathering Shadows</strong> saga at Castle Valtrith: <strong>The Evil Artifact</strong> through <strong>Breaking Down</strong></li>
+            <li data-id="playthrough_3_35" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 7</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_3_36" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 7</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_3_37">Complete Thursday's <strong>Blood &amp; Roses</strong> saga at Amityvale</li>
+            <li data-id="playthrough_3_38" class="f_sidequest f_unimportant">Complete the <strong>Harboring an Alien</strong> quest at the odd jobs board at the inn on Falconreach</li>
+            <li data-id="playthrough_3_39" class="f_sidequest f_unimportant">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=21802748">quest</a> from Verlyrus in Amityvale: <strong>The Well</strong></li>
+            <li data-id="playthrough_3_40" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 8</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_3_41" class="f_ sidequest f_unimportant f_seasonal">Complete the <strong>TLaPD 2015</strong> event</li>
+            <li data-id="playthrough_3_42" class="f_sidequest f_unimportant">Complete Grandiflora's <a href="http://forums2.battleon.com/f/tm.asp?m=22290562">quests</a> in Swordhaven</li>
+            <li data-id="playthrough_3_43" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 9</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_3_44">Investigate the shop on the right of Grandiflora at Swordhaven</li>
+            <li data-id="playthrough_3_45">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=17786528">quests</a> from the NPC at the entrance of Swordhaven</li>
+            <li data-id="playthrough_3_46" class="f_sidequest">Complete <a href="http://forums2.battleon.com/f/fb.asp?m=19877943">quests</a> by reading the strange letters pinned at the quest board in Swordhaven</li>
+            <li data-id="playthrough_3_47">Complete the <strong>Tournament of Champions</strong> saga at the <a href="http://forums2.battleon.com/f/fb.asp?m=19877943">quest board</a> in Swordhaven</li>
+            <li data-id="playthrough_3_48">Complete a <a href="http://forums2.battleon.com/f/tm.asp?m=22170261">quest</a> from Ash's <strong>The Thorns</strong> saga: <strong>Dark Devices</strong></li>
+            <li data-id="playthrough_3_49">Complete Symone's <strong>Caitiff's Study</strong> saga at Castle Valtrith</li>
+            <li data-id="playthrough_3_50" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 10</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_3_51" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 10</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_3_52" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 10</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_3_53">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=4228780">quests</a> from Ash's <strong>The Thorns</strong> saga: <strong>Enigmatic Epidemic</strong> and onwards</li>
+            <li data-id="playthrough_3_54">Complete Sir Leon's <strong>Sanctuary's Return</strong> saga at The Shears</li>
+            <li data-id="playthrough_3_58">Complete Ash's <strong>Six Heroes</strong> saga in Falconreach</li>
+            <li data-id="playthrough_3_55">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21165429">quests</a> from Kara SuLema at Sulen'Eska: <strong>My Spot</a></strong> through <strong>Tea for Three</strong></li>
+            <li data-id="playthrough_3_74" class="f_sidequest f_unimportant">Explore the Pale Sea from <a href="http://forums2.battleon.com/f/tm.asp?m=21165429">Helm's Harbor</a></li>
+            <li data-id="playthrough_3_75">Sail to and explore <a href="http://forums2.battleon.com/f/tm.asp?m=22326302">Maar</a></li>
+            <li data-id="playthrough_3_76" class="f_sidequest f_unimportant">Explore the Pasgur Ocean from <b>Maar</b></li>
+            <li data-id="playthrough_3_77">Sail to and explore the anchor across the Pasgur Ocean, accessible from <b>Maar</b></li>
+            <li data-id="playthrough_3_79">Do the quests from the scroll on the first screen in Nieboheim's <b><a href="http://forums2.battleon.com/f/tm.asp?m=22337676">First Halo</a></b></li>
+            <li data-id="playthrough_3_78">See the cutscenes and play the boss fight of the <a href="http://forums2.battleon.com/f/tm.asp?m=22332402">Friday the 13th Sinnocence</a> war from <b>Uaanta</b> in Falconreach</li>
+            <li data-id="playthrough_3_56" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 9</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_3_57" class="f_ sidequest f_unimportant f_seasonal">Complete the <strong>TLaPD 2016</strong> event</li>
+            <li data-id="playthrough_3_59">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21850621">quests</a> at The Nest: <strong>The Nest</strong> through <strong>The Price</strong></li>
+            <li data-id="playthrough_3_60" class="f_sidequest">Complete Teka's <a href="http://forums2.battleon.com/f/tm.asp?m=22139899">quests</a> at the libraseum in southern Falconreach</li>
+            <li data-id="playthrough_3_61" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 11</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_3_62" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 11</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_3_63" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 11</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_3_64" class="f_sidequest f_unimportant">Complete quests at the theatre in southern Falconreach</li>
+            <li data-id="playthrough_3_65" class="f_sidequest f_unimportant">Travel to the <strong>Drowned Fortress</strong> at Maguswood</li>
+            <li data-id="playthrough_3_66" class="f_sidequest f_unimportant">Complete Aria's <strong>Family Time</strong> saga at the pet shop in Falconreach</li>
+            <li data-id="playthrough_3_67" class="f_sidequest f_unimportant">Complete Gingkage's <a href="http://forums2.battleon.com/f/tm.asp?m=22021843">quests</a> at south of Falconreach, outside of the walls</li>
+            <li data-id="playthrough_3_68" class="f_sidequest f_unimportant">Complete <a href="http://forums2.battleon.com/f/tm.asp?m=21801745">quests</a> from Verlyrus in Amityvale: <strong>A Proper Quest</strong> through <strong>Into the Box</strong></li>
+            <li data-id="playthrough_3_69" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 12</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_3_70" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 12</strong> of the Thankstaking storybook</li>
+            <li data-id="playthrough_3_71" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 12</strong> of the Frostval storybook</li>
+            <li data-id="playthrough_3_72" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 10</strong> of the Hero's Heart Day storybook</li>
+            <li data-id="playthrough_3_73" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 9</strong> of the Lucky Day storybook</li>
+            <li data-id="playthrough_3_80" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 13</strong> of the Mogloween storybook</li>
+            <li data-id="playthrough_3_81" class="f_ sidequest f_unimportant f_seasonal">Complete <strong>Chapter 13</strong> of the Thankstaking storybook</li>
+          </ul>
+          <hr>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tabGear">  
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1><strong>Definitive DragonFable Guide</strong></h1>
+            <p class="lead">Give us feedback on the <a href="https://discord.gg/SC3zM3v">largest DragonFable Discord server</a>!</p><hr><h4>The Best in Slot Tool is meant to help you assess the best equipment according to your preferences.</h4>
+            <h3 style="color: red">This is not updated to the recent updates in stats. Since there is more changes in-coming, it won't be up to date for the weekend at the very least.</h3>
+          </div>
+        </div>
+        <h2 class="col-md-12"><strong>Best in Slot Tool</strong></h2>
+
+        <div class="form-group">
+          <label for="level">Level:</label>
+          <input type="number" class="form-control" min="1" max="85" id="level">
+        </div>
+        Sort By:<div class="form-group"><select class="form-control" id="BiSSort">
+          <option value="strOffensive">Offensive Warrior</option>
+          <option value="strOverall">Overall Warrior</option>
+          <option value="intOffensive">Offensive Mage</option>
+          <option value="intOverall">Overall Mage</option>
+          <option value="dexOffensive">Offensive Rogue</option>
+          <option value="dexOverall">Overall Rogue</option>
+          <option value="defensive">Defensive</option>
+        </select></div>
+        <div class="col-md-12" role="group" data-toggle="buttons">
+          <div class="btn-group filters">
+          	<label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_rare" data-item-toggle="g_rare" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Rare
+            </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_da" data-item-toggle="g_da" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                DA
+            </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_dc" data-item-toggle="g_dc" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                DC
+            </label>
+            <label class="btn btn-default" style="display: none"> <!-- Hidden since it currently does nothing -->
+                <input type="checkbox" id="togglefilter_bigDmgRange" data-item-toggle="g_bigDmgRange" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Big Damage Range
+            </label>
+            <label class="btn btn-default" style="display: none"> <!-- Hidden since it currently does nothing -->
+                <input type="checkbox" id="togglefilter_challenging" data-item-toggle="g_challenging" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Challenging
+            </label>
+            <label class="btn btn-default" style="display: none"> <!-- Hidden since it currently does nothing -->
+                <input type="checkbox" id="togglefilter_farmIntense" data-item-toggle="g_farmIntense" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Farming Intense
+            </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_seasonalItem" data-item-toggle="g_seasonal" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Seasonal
+            </label>
+          </div>
+        </div>
+
+        <p><strong>Helm</strong>: <span id="helms-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Cape</strong>: <span id="capes-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Necklace</strong>: <span id="necklaces-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Ring</strong>: <span id="rings-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Belt</strong>: <span id="belts-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Trinket</strong>: <span id="trinkets-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Bracer</strong>: <span id="bracers-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <hr>
+      </div>
+
+      <div class="tab-pane" id="tabFAQ">
+        <h2 id="faq-title"><strong>Frequently Asked Questions</strong></h2>
+        <div id="faq">
+          <div id="expand-all">
+            <div id="expand-all-container"><a id="expand-all-btn">Expand all</a></div>
+            <div id="collapse-all-container"><a id="collapse-all-btn">Collapse all</a></div>
+          </div>
+
+          <hr style="width: 100%">
+          
+          <h3>
+            <a href="#faq1" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            Do I need to follow the Story Checklist in order?&nbsp;
+          </h3>
+          <div id="faq1" class="collapse">
+            <p class="faq-item">
+              Only if you're looking for a better understanding of the story. Otherwise, no.
+            </p>
+          </div>
+
+          <hr>
+
+          <h3>
+            <a href="#faq2" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            Why is Book 2 so short?
+          </h3>
+          <div id="faq2" class="collapse">
+            <p class="faq-item">
+              Staff were undergoing major changes at the time. You can read more about it <a href="http://www.dragonfable.com/gamedesignnotes/if-you-can-dodge-a-wrench-5627">here</a>.
+            </p>
+          </div>
+
+          <hr>
+
+          <h3>
+            <a href="#faq3" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            Some unimportant quests are missing. Why are they not listed?
+          </h3>
+          <div id="faq3" class="collapse">
+            <p class="faq-item">
+              If a quest is truly irrelevant, offers no story at all, no character development, doesn't add to anything, and is generally not worth your time, then it won't be included. 
+            </p>
+          </div>
+
+          <hr>
+
+          <h3>
+            <a href="#faq4" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            What are seasonal events?
+          </h3>
+          <div id="faq4" class="collapse">
+            <p class="faq-item">
+              Seasonal events are content that are generally not available all year round, unless you own the <a href="http://forums2.battleon.com/f/fb.asp?m=22302491">Storybook Collection</a> house item. The large majority of seasonal events are completely disposable: they're often irrelevant, and very self-contained. Skipping seasonal events would not hurt your understanding of the story by any means.
+            </p>
+          </div>
+
+          <hr>
+
+          <h3>
+            <a href="#faq5" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            Why are some seasonal events so close to each other?
+          </h3>
+          <div id="faq5" class="collapse">
+            <p class="faq-item">
+              Staff in the past often disregarded chronology when pushing seasonal content. As such, most of them don't have an exact spot to be in the storyline. It is advised to play through them with a high suspension of disbelief, while also ignoring the fact that there's supposed to be a year between chapters.
+            </p>
+          </div>
+
+          <hr>
+
+          <h3>
+            <a href="#faq6" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            Why is Chapter 2 of the Mogloween storybook not listed?
+          </h3>
+          <div id="faq6" class="collapse">
+            <p class="faq-item">
+              Chapter 2 of the Mogloween storybook was released as The Necropolis.
+            </p>
+          </div>
+
+          <hr>
+
+          <h3>
+            <a href="#faq7" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            Can I use this for multiple characters?
+          </h3>
+          <div id="faq7" class="collapse">
+            <p class="faq-item">
+              Yes. There's a profile feature where you can create, edit, delete, import and export your own profiles. You can find it by clicking the gear icon on the top right.
+            </p>
+          </div>
+
+          <hr>
+
+          <h3>
+            <a href="#faq8" data-toggle="collapse" class="btn btn-primary btn-collapse btn-sm collapsed expand-faq-button"></a>
+            How are changes saved?
+          </h3>
+          <div id="faq8" class="collapse">
+            <p class="faq-item">
+              Changes are saved on your browser's cache. Clearing your cache will also clear your saved changes. Alternatively, you can export profiles and save them on your computer.
+            </p>
+          </div>
+
+          <hr>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tabOptions">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1><strong>Definitive DragonFable Guide</strong></h1>
+            <p class="lead">Give us feedback on the <a href="https://discord.gg/SC3zM3v">largest DragonFable Discord server</a>!</p>
+          </div>
+        </div>
+          <h2><strong>Options</strong></h2>
+        <!-- Profile Selection -->
+        <div class="row">
+          <div class="col col-md-6"><h3>Profile</h3></div>
+          <div class="col col-md-6">
+            <form class="form-inline  pull-right">
+              <div class="form-group"><select class="form-control" id="profiles"></select></div>
+              <button class="btn btn-default" type="button" id="profileAdd">Add</button>
+              <button class="btn btn-default" type="button" id="profileEdit">Edit</button>
+              <button class="btn btn-default" type="button" id="profileImport">Import</button>
+              <button class="btn btn-default" type="button" id="profileExport">Export</button>
+            </form>
+          </div>
+        </div>
+        <hr />
+        <!-- Theme Selection -->
+        <div class="row">
+          <div class="col col-md-8"><h3>Theme</h3></div>
+          <div class="col col-md-4"><select class="form-control" id="themes"><!-- Gets filled by jQuery. --></select></div>
+        </div>
+      </div>
+
+      <div id="profileModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h3 id="profileModalTitle" class="modal-title">Profile</h3>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <div class="control-group">
+                  <label class="control-label" for="profileModalName">Name</label>
+                  <div class="controls">
+                    <input type="text" class="form-control" id="profileModalName" placeholder="Enter profile name">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <a href="#" id="profileModalClose" class="btn btn-default" data-dismiss="modal">Close</a>
+              <a href="#" id="profileModalAdd" class="btn btn-primary" data-dismiss="modal">Add</a>
+              <a href="#" id="profileModalUpdate" class="btn btn-primary">Update</a>
+              <a href="#" id="profileModalDelete" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+    </div>
+    <!-- tab-content -->
+  </div>
+  <!-- container -->
+
+  <div class="hiddenfile">
+    <input name="upload" type="file" id="fileInput" />
+  </div>
+
+  <a href="#" class="back-to-top">Back to Top</a>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/andris9/jStorage/v0.4.12/jstorage.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.8.0/jets.min.js"></script>
+  <script src="js/jquery.highlight.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/bis.js"></script>
+</body>
+</html>
