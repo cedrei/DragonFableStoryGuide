@@ -5,14 +5,57 @@
 "use strict";
 
 var bisData = {
-	belts: {},
-	bracers: {},
-	capes: {},
-	helms: {},
-	necklaces: {},
-	rings: {},
-	trinkets: {}
+	Belts: {},
+	Bracers: {},
+	Capes: {},
+	Helms: {},
+	Necklaces: {},
+	Rings: {},
+	Trinkets: {},
+	Weapons: {}
 };
+
+let statTranslateTable = {
+	"Damage Low": "minDamage",
+	"Damage High": "maxDamage",
+	"STR": "str",
+	INT: "int",
+	DEX: "dex",
+	CHA: "cha",
+	LUK: "luk",
+	END: "end",
+	WIS: "wis",
+	Crit: "crit",
+	"Bonus": "bonus",
+	"Melee Def": "Melee",
+	"Pierce Def": "Pierce",
+	"Magic Def": "Magic",
+	"Block": "Block",
+	"Parry": "Parry",
+	"Dodge": "Dodge",
+	"???": "???",
+	"Bacon": "Bacon",
+	"Darkness": "Darkness",
+	Disease: "Disease",
+	Energy: "Energy",
+	Evil: "Evil",
+	Fear: "Fear",
+	Fire: "Fire",
+	Good: "Good",
+	Ice: "Ice",
+	Light: "Light",
+	Metal: "Metal",
+	Nature: "Nature",
+	None: "None",
+	Poison: "Poison",
+	Silver: "Silver",
+	Stone: "Stone",
+	Water: "Water",
+	Wind: "Wind",
+	All: "All",
+	Immobility: "Immobility",
+	Health: "Health"
+}
 
 // Called from main.js when the rest of the page is loaded
 function setupBiS() {
@@ -38,10 +81,15 @@ function setUpGetJSON() {
 */
 function getData() {
 	$.each(Object.keys(bisData), function(index, itemType) {
-		$.getJSON("BiSData/Finished/" + itemType + ".json", function(data) {
-			bisData[itemType] = data;
-			showItem(findBestItem(itemType));
-		});
+		$.ajax({
+			type: "GET",
+			url: "gearstuff/DF Calculator - "+itemType+".csv",
+			dataType: "text",
+			success: (data) => {
+				bisData[itemType] = $.csv.toObjects(data)
+				updateBiSValues()
+			}
+		})
 	});
 }
 
@@ -58,18 +106,37 @@ function findBestItem(itemType) {
 	let profileData = profiles[profilesKey][profiles.current];
 	let bestItem = {name: "N/A", score: 0, link: "", type: itemType};
 	try {
-		$.each(bisData[itemType][profileData.BiSDefaults.sort][profileData.BiSDefaults.level-1], function(itemID, data) {
-			if (data.score > bestItem.score && checkFilters(data, profileData.hidden_values)) {
-				bestItem.name = data.name;
-				bestItem.score = data.score;
-				bestItem.link = data.link;
+		$.each(bisData[itemType], function(itemID, data) {
+			let score = getScore(data, profileData)
+			if (score > bestItem.score && checkFilters(data, profileData.hidden_values)) {
+				bestItem.name = data.Name;
+				bestItem.score = score;
+				bestItem.link = data.Link;
 			}
 		});
 	} catch(err) {
 		bestItem = {name: 'Error! Error! Something went wrong here. Error message: <br /><p style="color: red; font-size: 20px">'+err+"</p>", score: 31415926535, link: "", type: itemType}
+		throw err
 	}
 	
 	return bestItem;
+}
+
+function getScore(item, profileData) {
+	let desiredLevel = profileData.BiSDefaults.level
+	let sortType = profileData.BiSDefaults.sort
+	let activeScores = bisScores[sortType][desiredLevel-1]
+	if (+item.level > desiredLevel) {
+		return -Infinity
+	}
+
+	let score = 0
+	for (let i in statTranslateTable) {
+		if (item[i]!=undefined) {
+			score += (+item[i])*activeScores[statTranslateTable[i]]
+		}
+	}
+	return score
 }
 
 /*
@@ -79,7 +146,7 @@ function findBestItem(itemType) {
 function checkFilters(data, filters) {
 	var isValid = true
 	$.each(filters, function(name, value) {
-		if (value == true && data[name.substring(2)] == "Yes" && name.charAt(0) == "g") {
+		if (value == true && data[name.substring(2)] != "0" && data[name.substring(2)] != undefined && name.charAt(0) == "g") {
 			isValid = false;
 			return false;
 		}
@@ -93,7 +160,7 @@ function checkFilters(data, filters) {
 *	separate in the future if more advanced stuff is desired
 */
 function showItem(item) {
-	if (item.link == "") {
+	if (item.Link == "") {
 		$("#" + item.type + "-BiS").html(item.name);
 	} else {
 		$("#" + item.type + "-BiS").html("<a href="+item.link+' target="_blank">'+item.name+"</a>");

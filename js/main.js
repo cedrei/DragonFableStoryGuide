@@ -374,10 +374,13 @@ var profiles = $.jStorage.get(profilesKey, {});
             g_bigDmgRange: false, 
             g_challenging: false, 
             g_farmIntense: false, 
-            g_dc: false, 
-            g_rare: true,
-            g_seasonal: true, 
-            g_da: false
+            g_DC: true, 
+            g_Rare: true,
+            g_Seasonal: true, 
+            g_DA: false,
+            "g_Special Offer": true,
+            g_Guardian: true,
+            g_DM: false
         }
         if (!('hidden_values' in profiles[profilesKey][profile_name]))
             profiles[profilesKey][profile_name].hidden_values = {};
@@ -388,7 +391,7 @@ var profiles = $.jStorage.get(profilesKey, {});
         });
         if (!('BiSDefaults' in profiles[profilesKey][profile_name]))
             profiles[profilesKey][profile_name].BiSDefaults = {
-                level: 85,
+                level: 90,
                 sort: 'strOverall'
             };
     }

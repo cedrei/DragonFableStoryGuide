@@ -36,7 +36,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="nav-collapse">
         <ul class="nav navbar-nav">
-        <!-- <li><a href="#tabGear" class="underline-this" data-toggle="tab">BiS</a></li> -->
+          <li><a href="#tabGear" class="underline-this" data-toggle="tab">BiS</a></li>
           <li class="active"><a href="#tabStory" class="underline-this" data-toggle="tab">Story</a></li>
           <li><a href="#tabFAQ" class="underline-this" data-toggle="tab">FAQ</a></li>
         </ul>
@@ -375,7 +375,7 @@
           <div class="col-md-12 text-center">
             <h1><strong>Definitive DragonFable Guide</strong></h1>
             <p class="lead">Give us feedback on the <a href="https://discord.gg/SC3zM3v">largest DragonFable Discord server</a>!</p><hr><h4>The Best in Slot Tool is meant to help you assess the best equipment according to your preferences.</h4>
-            <h3 style="color: red">This is not updated to the recent updates in stats. Since there is more changes in-coming, it won't be up to date for the weekend at the very least.</h3>
+            <!--<h3 style="color: red">This is not updated to the recent updates in stats. Since there is more changes in-coming, it won't be up to date for the weekend at the very least.</h3>-->
           </div>
         </div>
         <h2 class="col-md-12"><strong>Best in Slot Tool</strong></h2>
@@ -396,19 +396,19 @@
         <div class="col-md-12" role="group" data-toggle="buttons">
           <div class="btn-group filters">
           	<label class="btn btn-default">
-                <input type="checkbox" id="togglefilter_rare" data-item-toggle="g_rare" />
+                <input type="checkbox" id="togglefilter_rare" data-item-toggle="g_Rare" />
                 <span class="glyphicon glyphicon-eye-close"></span>
                 <span class="glyphicon glyphicon-eye-open"></span>
                 Rare
             </label>
             <label class="btn btn-default">
-                <input type="checkbox" id="togglefilter_da" data-item-toggle="g_da" />
+                <input type="checkbox" id="togglefilter_da" data-item-toggle="g_DA" />
                 <span class="glyphicon glyphicon-eye-close"></span>
                 <span class="glyphicon glyphicon-eye-open"></span>
                 DA
             </label>
             <label class="btn btn-default">
-                <input type="checkbox" id="togglefilter_dc" data-item-toggle="g_dc" />
+                <input type="checkbox" id="togglefilter_dc" data-item-toggle="g_DC" />
                 <span class="glyphicon glyphicon-eye-close"></span>
                 <span class="glyphicon glyphicon-eye-open"></span>
                 DC
@@ -432,21 +432,40 @@
                 Farming Intense
             </label>
             <label class="btn btn-default">
-                <input type="checkbox" id="togglefilter_seasonalItem" data-item-toggle="g_seasonal" />
+                <input type="checkbox" id="togglefilter_seasonalItem" data-item-toggle="g_Seasonal" />
                 <span class="glyphicon glyphicon-eye-close"></span>
                 <span class="glyphicon glyphicon-eye-open"></span>
                 Seasonal
             </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_seasonalItem" data-item-toggle="g_Special Offer" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Special Offer
+            </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_seasonalItem" data-item-toggle="g_Guardian" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                Guardian
+            </label>
+            <label class="btn btn-default">
+                <input type="checkbox" id="togglefilter_seasonalItem" data-item-toggle="g_DM" />
+                <span class="glyphicon glyphicon-eye-close"></span>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                DM
+            </label>
           </div>
         </div>
 
-        <p><strong>Helm</strong>: <span id="helms-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
-        <p><strong>Cape</strong>: <span id="capes-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
-        <p><strong>Necklace</strong>: <span id="necklaces-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
-        <p><strong>Ring</strong>: <span id="rings-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
-        <p><strong>Belt</strong>: <span id="belts-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
-        <p><strong>Trinket</strong>: <span id="trinkets-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
-        <p><strong>Bracer</strong>: <span id="bracers-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Weapon</strong>: <span id="Weapons-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Helm</strong>: <span id="Helms-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Cape</strong>: <span id="Capes-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Necklace</strong>: <span id="Necklaces-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Ring</strong>: <span id="Rings-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Belt</strong>: <span id="Belts-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Trinket</strong>: <span id="Trinkets-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
+        <p><strong>Bracer</strong>: <span id="Bracers-BiS"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span></p>
         <hr>
       </div>
 
@@ -654,8 +673,10 @@
   <script src="https://cdn.rawgit.com/andris9/jStorage/v0.4.12/jstorage.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.8.0/jets.min.js"></script>
+  <script src="https://unpkg.com/jquery-csv@1.0.21/src/jquery.csv.js"></script>
   <script src="js/jquery.highlight.js"></script>
   <script src="js/main.js"></script>
+  <script src="gearstuff/scores.js"></script>
   <script src="js/bis.js"></script>
 </body>
 </html>
