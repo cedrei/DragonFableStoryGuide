@@ -126,7 +126,7 @@ function getScore(item, profileData) {
 	let desiredLevel = profileData.BiSDefaults.level
 	let sortType = profileData.BiSDefaults.sort
 	let activeScores = bisScores[sortType][desiredLevel-1]
-	if (+item.level > desiredLevel) {
+	if (+item.Level > desiredLevel) {
 		return -Infinity
 	}
 
