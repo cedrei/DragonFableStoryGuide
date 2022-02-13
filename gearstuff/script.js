@@ -201,7 +201,7 @@ function generateAllScores() {
 		let statBuild = getStatsFromGear(gear, i)
 		scores.strOffensive[i] = generateOffenseScores(statBuild, i, "str")
 	}
-	return
+	
 	scores.intOffensive[0]=generateOffenseScores(baseBuild, 1, "int")
 	for (let i = 1; i < 90; i++) {
 		let gear = getGear(scores.intOffensive[i-1], i)
